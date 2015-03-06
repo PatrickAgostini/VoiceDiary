@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/user_list_userID_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/user_list_userID"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="23dp"
+        android:text="@string/textField_userID" />
+
+    <Spinner
+        android:id="@+id/user_list_userID"
+        android:layout_width="246dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_list_userID_title"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/user_list_password"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignLeft="@+id/user_list_userID"
+        android:layout_alignRight="@+id/user_list_userID"
+        android:layout_below="@+id/user_list_userID"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:inputType="textMultiLine" >
+
+        <requestFocus />
+    </EditText>
+
+</RelativeLayout>

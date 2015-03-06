@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView android:id="@+id/recording_state"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:textSize="22sp"
+        android:text="@string/recording_stopped" />
+    
+    <TextView android:id="@+id/recording_time"
+        android:layout_above="@id/recording_state"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:textColor="#FF0000"
+        android:textSize="32sp"/>
+    
+    <TextView android:id="@+id/frequencyText"
+        android:layout_above="@id/recording_time"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:textSize="24sp"/>
+    
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/frequencyText"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="75dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/aaa"
+        android:contentDescription="@string/app_name" />
+
+</RelativeLayout>

@@ -1,0 +1,198 @@
+<resources>
+
+    <string name="lang">de</string>
+    <string name="app_name">Voice diary</string>
+    <string name="settings">Einstellungen</string>
+    <string name="paswordTitle">Kennwort</string>
+    <string name="ask_password">Kennwort Eingeben</string>
+    <string name="diagramm">Diagramme</string>
+    <string name="title_activity_record">Voice diary</string>
+    <string name="recording_started">Aufnahme gestartet</string>
+    <string name="recording_stopped">Aufnahme angehalten</string>
+    <string name="buttton_question">&gt;</string>
+    <string name="upload">Letzter Upload %1$tR %1$td.%1$tm</string>
+    <string name="entry">Letzter Eintrag %1$tR %1$td.%1$tm</string>
+    <string name="finish">Fragebogen Ende</string>
+    <string name="empty_diagramm">Es sind keine Messungen vorhanden.</string>
+    <string name="questionnaire_timeout">Sie waren zu lange abwesend. Der letzte Eintrag wurde gelöscht.</string>
+    <string name="questionnaire_dialog_title">Fragebogen</string>
+    <string name="questionnaire_dialog_message">Die Aufnahme war erfolgreich. Bitte füllen Sie den Fragebogen aus, um den Eintrag abzuschließen.</string>
+    <string name="question_end">Sie haben den Fragebogen erfolgreich ausgefüllt. Bitte drücken Sie auf den Beenden-Button, um zum Hauptmenü zurückzukehren.</string>
+    <string name="start_recording">Eintrag verfassen</string>
+    <string name="login">Login</string>
+    <string name="login_or_register">Einloggen Oder Registrieren?</string>
+    <string name="password">Kennwort</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="birthday">Geburtstag</string>
+    <string name="male">Männlich</string>
+    <string name="female">Weiblich</string>
+    <string name="register">Registrieren</string>
+    <string name="recording_error">Der Zugriff auf das Mikrofon ist fehlgeschlagen.</string>
+    <string name="regquestion_hoarseness">Sind Sie öfter heiser? (Nicht durch eine Erkältung)</string>
+    <string name="regquestion_smoker">Rauchen Sie?</string>
+    <string name="regquestion_job">Haben Sie einen sprechintensiven Beruf?</string>
+    <string name="regquestion_dysphonia">Hat ein Arzt eine Stimmtörung bei Ihnen diagnostiziert?</string>
+    <string name="regquestion_operation">Hatten Sie eine Operation?</string>
+    <string name="regquestion_operation_diagnosis">Diagnose der Operation</string>
+    <string name="regquestion_operation_date">Datum der Operation</string>
+    <string name="regquestion_therapy">Hatten Sie eine Therapie?</string>
+    <string name="regquestion_therapy_diagnosis">Diagnose der Therapie?</string>
+    <string name="regquestion_therapy_date">Datum der Therapie?</string>
+    <string name="register_patientID">Patienten ID</string>
+    <string name="set_frequency_end_dialog_title">Ihre Analyse ist komplett.</string>
+    <string name="set_frequency_end_dialog_message">Das Ergebnis der Analyse ist %1$s HZ. Sie können die Analyse wiederholen, falls Sie unzufrieden sind.</string>
+    <string name="set_frequency_end_dialog_repeat">Analyse wiederholen</string>
+    <string name="set_frequency_start_dialog_title">Frequenz analysieren</string>
+    <string name="set_frequency_start_dialog_message">Bitte gehen Sie in einen ruhigen Raum, um die Analyse zu starten. Während der Analyse müssen Sie für ein paar Sekunden einen Vokal \"singen\". Zum Beispiel das \'A\'.</string>
+    <string name="set_frequency_start_dialog_start_message">Damit vergleichbare Stimmaufnahmen gemacht werden können, muss ihre Grundfrquenz ermittelt werden. Dafür gehen Sie in einen ruhigen Bereich. Während der Analyse müssen Sie für ein paar Sekunden einen Vokal \"singen\". Zum Beispiel das \'A\'.</string>
+    <string name="set_frequency_dialog_ok">OK</string>
+    <string name="set_frequency_dialog_later">Später</string>
+    <string name="set_frequency_dialog_back">Zurück</string>
+    <string name="set_frequency_show_waittime">Die Analyse startet in %1$s Sekunden.</string>
+    <string name="record_dialog_title">Aufnahme</string>
+    <string name="record_dialog_message">Die Stimmaufnahme erfolgt erst, wenn sich der Regler der folgenden Anzeige im grünen Breich befindet. Dieser passt sich ihrer Tonhöhe an. Während der Aufnahme müssen Sie für ein paar Sekunden einen Vokal \"singen\". Zum Beispiel das \'A\'.</string>
+    <string name="record_dialog_ok">OK</string>
+    <string name="record_dialog_back">Zurück</string>
+    <string name="set_frequency">Frequenz analysieren</string>
+    <string name="logout">Logout</string>
+    <string name="dateFormat">%1$td.%1$tm.%1$ty</string>
+    <string name="hourFormat">%1$tH:%1$tM Uhr</string>
+    <string name="language">Sprache</string>
+    <string name="register_successful">Registrierung erfolgreich.</string>
+    <string name="login_successful">Login erfolgreich.</string>
+    <string name="login_error">Login fehlgeschlagen. Bitte überprüfen Sie ihre Eingabe.</string>
+    <string name="login_password_error">Login fehlgeschlagen. Bitte überprüfen Sie ihr Kennwort.</string>
+    <string name="login_username_error">Login fehlgeschlagen. Bitte überprüfen Sie ihren Benutzernamen.</string>
+    <string name="user_list">Benutzer Liste</string>
+    <string name="title_activity_administration">Administration</string>
+    <string name="show_data_password_string">Kennwort:    </string>
+    <string name="show_data_login_string">Login:     </string>
+    <string name="show_data_Title">Bitte Merken Sie sich das Login und Kennwort!</string>
+    <string name="eduroam_title">Eduroam</string>
+    <string name="eduroam_config_user_title">Configure User</string>
+    <string name="eduroam_add_user_title">Eduroam Login</string>
+    <string name="password_error">Bitte Kennwort Angegben!</string>
+    <string name="select_value">Sie müssen einen Wert auswählen!</string>
+    <string name="good_noise">Still</string>
+    <string name="moderate_noise">Geräuschvoll</string>
+    <string name="bad_noise">Sehr Geräuschvoll</string>
+    <string name="noise_indication_text">Bitte nehmen Sie in einer möglichst ruhigen Umgebung auf.</string>
+    <string name="wifi_timedout">Kann keine Verbindung herstellen!</string>
+    <string name="wrong_password">Kennwort Falsch!</string>
+    <string name="logout_successful">Eduroam Verbindung Unterbrochen!</string>
+    <string name="wifi_connected">Wifi mit Eduroam Verbunden, Stop nach 15 min!</string>
+    <string name="synchronize_wifi_off">Sie müssen eine Internetverbindung herstellen!</string>
+	<string name="synchronize_time_out">Synchronisation abgelaufen, bitte Später nochmals probieren..</string>
+    <string name="progressTitle">Synchronisation</string>
+    <string name="progressString">Sende Daten(…,&#8230;)</string>
+    <string name="synchronize_ok">Synchronisation war erfolgreich!</string>
+    <string name="synchronize_not_ok">Synchronisation war nicht erfolgreich!</string>
+    <string name="noise_meter">Geräuschmesser</string>
+
+    <string-array name="time_period_arrays">
+        <item>Letzten 24 Stunden</item>
+        <item>Letzter Tag</item>
+        <item>Letzten 7 Tage</item>
+        <item>Letzten 14 Tage</item>
+        <item>Letzten 30 Tage</item>
+    </string-array>
+    <string-array name="languages">
+        <item>Automatisch</item>
+        <item>Englisch</item>
+        <item>Deutsch</item>
+    </string-array>
+    <string-array name="languages_code">
+        <item>auto</item>
+        <item>en</item>
+        <item>de</item>
+    </string-array>
+
+    <string name="later">Später</string>
+    <string name="missing_name">Bitte geben Sie Ihren Namen ein!</string>
+    <string name="missing_surename">Bitte geben Sie Ihren Nachnamen ein!</string>
+    <string name="missing_password">Bitte geben Sie ein Kennwort ein!</string>
+    <string name="next">Weiter</string>
+    <string name="wifi_timeout">Verbindungsaufbau dauert zu lange, bitte überprüfen Sie Ihr Kennwort oder Ihre Email-Adresse!</string>
+
+    <!-- General Strings -->
+
+    <string name="exit">Verlassen</string>
+    <string name="action_settings">Einstellungen</string>
+
+    <!-- Login Dialog -->
+
+
+    <!-- Registration Questions -->
+
+
+    <!-- Record Dialog -->
+	
+	<string name="noise_level_too_high">Umgebung zu laut. Begeben Sie sich bitte an einen ruhigeren Ort um fortzufahren.</string>
+
+    <!-- Activity Titles -->
+    <string name="title_activity_phone_settings">PhoneSettingsActivity</string>
+    <string name="title_activity_user_list">UserListActivity</string>
+    <string name="title_activity_eduroam">EduroamActivity</string>
+    <string name="title_activity_edu_add_user">EduAddUserActivity</string>
+    <string name="title_activity_edu_config_user">EduConfigUserActivity</string>
+    <string name="title_activity_open">OpenActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_noise_meter">NoiseMeterActivity</string>
+	<string name="dialog_good_job">Vielen Dank! Weiter So!</string>
+
+    <!-- Set Frequency -->
+
+
+    <!-- User List -->
+
+
+    <!-- Synchronization Dialog -->
+
+
+    <!-- Noise Meter Dialog Strings -->
+    <!-- General Titles -->
+
+
+    <!-- General Message Strings -->
+    <string name="missing_field">Bitte Alle Felder Ausfüllen!</string>
+	<string name="nothing_selected">Bitte Account Wählen!</string>
+	<string name="wifi_not_exist">Eduroam Nicht Erreichbar!</string>
+	<string name="delete_userID_question">Wollen Sie Wirklich Diesen Account Löschen?</string>
+	<string name="delete_userID_title">Account Löschen</string>
+	<string name="progress_dialog_connecting">Verbindungsaufbau an Das Eduroam-Netzwerk.</string>
+	<string name="progress_connecting">Verbindungsaufbau&#8230;</string>
+	<string name="exit_app_question">Wollen Sie die App Wirklich Verlassen?</string>
+	<string name="master_password">Neues Master-Kennwort Erstellen</string>
+	
+    <!-- General TextField Titles -->
+    <string name="textField_userID">Benutzer ID</string>
+    <string name="textField_email">Email</string>
+    <string name="textField_password">Passwort</string>
+    <string name="textField_selectUserID">UserID Auswählen:</string>
+    <string name="textField_connected">Verbunden</string>
+
+    <!-- General Button Strings -->
+    <string name="button_add">Hinzufügen</string>
+    <string name="button_delete">Löschen</string>
+    <string name="button_change">Ändern</string>
+    <string name="button_cancel">Abbrechen</string>
+    <string name="button_start">Start</string>
+    <string name="button_stop">Stop</string>
+    <string name="button_synchronize">Synchronisieren</string>
+    <string name="button_ok">OK</string>
+    <string name="button_config">Ändern</string>
+    <string name="button_connect">Verbinden</string>
+    <string name="button_enter">Eingabe</string>
+    <string name="button_new">Neu</string>
+    <string name="button_doctor_domain">Ärzte Bereich</string>
+    <string name="button_patient_domain">Patienten Bereich</string>
+    <string name="button_set">Setzen</string>
+    <string name="new_password">Neues Kennwort</string>
+
+    <!-- Eduroam Strings -->
+    <string name="status_not_connected">Nicht Verbunden</string>
+    <string name="status_connected">Verbunden</string>
+    <string name="select_user">Bitte Wählen Sie einen Benutzer Aus!</string>
+
+</resources>

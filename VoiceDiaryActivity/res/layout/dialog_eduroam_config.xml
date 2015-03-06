@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".EduConfigUserActivity" >
+
+    <TextView
+        android:id="@+id/eduroam_config_select_userID_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/textField_selectUserID" />
+
+    <Spinner
+        android:id="@+id/eduroam_config_select_userID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:id="@+id/eduroam_config_userID_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textField_userID" />
+
+    <EditText
+        android:id="@+id/eduroam_config_userID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:inputType="textPersonName" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/eduroam_config_email_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textField_email" />
+
+    <EditText
+        android:id="@+id/eduroam_config_email"
+        android:layout_width="288dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:ems="10"
+        android:inputType="textEmailAddress|textPassword" />
+
+    <TextView
+        android:id="@+id/eduroam_config_password_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textField_password" />
+
+    <EditText
+        android:id="@+id/eduroam_config_password"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+</LinearLayout>

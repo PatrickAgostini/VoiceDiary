@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- General Strings -->
+    <string name="lang">en</string>
+    <string name="app_name">Voice diary</string>
+    <string name="ask_password">Enter Your Password</string>
+    <string name="settings">Settings</string>
+    <string name="diagramm">Diagramm</string>
+    <string name="logout">Logout</string>
+    <string name="buttton_question">&gt;</string>
+    <string name="upload">Last upload %1$tI:%1$tM %1$Tp %1$td/%1$tm</string>
+    <string name="entry">Last entry %1$tI:%1$tM %1$Tp %1$td/%1$tm</string>
+    <string name="finish">Finish Questionnaire</string>
+    <string name="empty_diagramm">There are no previous measures.</string>
+    <string name="questionnaire_timeout">You have been away for too long. This entry has been deleted!</string>
+    <string name="questionnaire_dialog_title">Questionnaire</string>
+    <string name="questionnaire_dialog_message">The recording is fine. Please complete the questionnaire to finish the session.</string>
+    <string name="question_end">You have successfully completed the questionnaire. Please press the finish button to return to the main menu.</string>
+    <string name="start_recording">Start recording</string>
+    <string name="exit">Exit</string>
+    <string name="login">Login</string>
+    <string name="login_or_register">Login Or Registration?</string>
+    <string name="password">Password</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="birthday">Birthday</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="register">Register</string>
+    <string name="recording_error">The microphone cannot be initiated.</string>
+    <string name="dateFormat">%1$td/%1$tm/%1$ty</string>
+    <string name="hourFormat">%1$tI:%1$tM %1$tp</string>
+    <string name="language">Language</string>
+	<string name="exit_app_question">Do You Want To Leave The App?</string>
+	<string name="master_password">Add New Master-Password</string>
+
+    <!-- Login Dialog -->
+    <string name="login_successful">Login successful</string>
+    <string name="login_error">Login failed. Please check your input.</string>
+    <string name="login_password_error">Login failed. Please check your password.</string>
+    <string name="login_username_error">Login failed. Please check your username.</string>
+
+    <!-- Registration Questions -->
+    <string name="regquestion_hoarseness">Do you often experience hoarseness? (except common-cold symptoms)</string>
+    <string name="regquestion_smoker">Do you smoke?</string>
+    <string name="regquestion_job">Do you have a vocal-intensive profession?</string>
+    <string name="regquestion_dysphonia">Do you have been diagnosed with dysphonia?</string>
+    <string name="regquestion_operation">Did you have an operation?</string>
+    <string name="regquestion_operation_diagnosis">Operation diagnosis</string>
+    <string name="regquestion_operation_date">Date of operation</string>
+    <string name="regquestion_therapy">Did you undergo a therapy?</string>
+    <string name="regquestion_therapy_diagnosis">Therapy diagnosis</string>
+    <string name="regquestion_therapy_date">Date of therapy</string>
+    <string name="register_successful">Registration Was Successful!</string>
+	<string name="register_patientID">Patient ID</string>
+    
+    <!-- Record Dialog -->
+    <string name="record_dialog_title">Recording</string>
+    <string name="record_dialog_message">The recording will start after the following slider, which will adapt to the pitch of your voice, has reached the green area. Please hold the vowel \'A\' until the recording process is completed.</string>
+    <string name="record_dialog_ok">Agree</string>
+    <string name="record_dialog_back">Back</string>
+    <string name="recording_started">Recording started</string>
+    <string name="recording_stopped">Recording stopped</string>
+	<string name="noise_level_too_high">Environment is Too Noisy. Please go to a more quite space to proceed.</string> 
+    <!-- Activity Titles -->
+    <string name="title_activity_phone_settings">PhoneSettingsActivity</string>
+    <string name="title_activity_user_list">UserListActivity</string>
+    <string name="title_activity_eduroam">EduroamActivity</string>
+    <string name="title_activity_edu_add_user">EduAddUserActivity</string>
+    <string name="title_activity_edu_config_user">EduConfigUserActivity</string>
+    <string name="title_activity_open">OpenActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_noise_meter">NoiseMeterActivity</string>
+    <string name="title_activity_administration">Administration</string>
+    <string name="title_activity_record">Voice diary</string>
+
+    <!-- Set Frequency -->
+    <string name="set_frequency_end_dialog_title">Your analysis is now complete.</string>
+    <string name="set_frequency_end_dialog_message">The fundamental frequency is %1$s HZ. Do you want to proceed?</string>
+    <string name="set_frequency_end_dialog_repeat">Repeat analysis</string>
+    <string name="set_frequency_start_dialog_title">Analyze fundamental frequency</string>
+    <string name="set_frequency_start_dialog_message">Please hold the vowel \'A\' until the recording process is completed. Try to avoid any background noise.</string>
+    <string name="set_frequency_start_dialog_start_message">Your fundamental frequency has to be determinded in order to create comparable voice recordings. Please hold the vowel \'A\' until the recording process is completed. Try to avoid any background noise.</string>
+    <string name="set_frequency_dialog_ok">Agree</string>
+    <string name="set_frequency_dialog_later">Later</string>
+    <string name="set_frequency_dialog_back">Back</string>
+    <string name="set_frequency_show_waittime">The recording process starts in %1$s seconds.</string>
+    <string name="set_frequency">Set frequency</string>
+
+    <!-- User List -->
+    <string name="show_data_password_string">Password:</string>
+    <string name="show_data_login_string">Login:</string>
+
+    <!-- Synchronization Dialog -->
+    <string name="progressTitle">Synchronization</string>
+    <string name="progressString">Sending Data (…, &#8230;)</string>
+    <string name="synchronize_ok">Synchronization was successful!</string>
+    <string name="synchronize_not_ok">Synchronization failed!</string>
+	<string name="synchronize_time_out">Synchronization Timed Out, Please try later again.</string>
+    
+    <!-- Noise Meter Dialog Strings -->
+    <string name="good_noise">Quiet</string>
+    <string name="moderate_noise">Noisy</string>
+    <string name="bad_noise">Very Noisy</string>
+
+    <!-- General Titles -->
+    <string name="open_phone_name">Phone Name</string>
+    <string name="noise_meter">Noise Meter</string>
+    <string name="user_list">User List</string>
+
+    <!-- General Message Strings -->
+    <string name="wifi_timeout">Connecting takes too long. Please check your password or email!</string>
+    <string name="missing_field">Please fill-out every Field!</string>
+    <string name="missing_name">Enter your name please!</string>
+    <string name="missing_surename">Enter your surename please!</string>
+    <string name="missing_password">Enter a password please!</string>
+    <string name="noise_indication_text">Please, try to record in a quiet environement.</string>
+    <string name="synchronize_wifi_off">Internet Connection missing!</string>
+    <string name="select_value">You have to choose a value!</string>
+    <string name="wrong_password">Wrong Password</string>
+    <string name="password_error">Please enter a Password!</string>
+    <string name="show_data_Title">Please Remember The Login and Password!</string>
+	<string name="action_settings">Settings</string>
+	<string name="nothing_selected">No Account Selected!</string>
+	<string name="wifi_not_exist">Eduroam Not Reachable!</string>
+	<string name="dialog_good_job">Thank You! Keep On The Good Work!</string>
+	<string name="delete_userID_question">Do You Really Want to Delete This Account?</string>
+	<string name="delete_userID_title">Delete Account</string>
+	<string name="progress_dialog_connecting">Connecting to Eduroam-Network.</string>
+	<string name="progress_connecting">Connecting&#8230;</string>
+	
+    <!-- General TextField Titles -->
+    <string name="textField_userID">User ID</string>
+    <string name="textField_email">Email</string>
+    <string name="textField_password">Password</string>
+    <string name="textField_selectUserID">Select UserID:</string>
+    <string name="textField_connected">Connected</string>
+
+    <!-- General Button Strings -->
+    <string name="button_add">Add</string>
+    <string name="button_delete">Delete</string>
+    <string name="button_change">Change</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_start">Start</string>
+    <string name="button_enter">Enter</string>
+    <string name="button_stop">Stop</string>
+    <string name="button_synchronize">Synchronize</string>
+    <string name="button_ok">OK</string>
+    <string name="button_config">Configure</string>
+    <string name="button_connect">Connect</string>
+    <string name="button_new">New</string>
+    <string name="button_doctor_domain">Doctor Domain</string>
+    <string name="button_patient_domain">Patient Domain</string>
+    <string name="button_set">Set</string>
+    <string name="later">Later</string>
+    <string name="next">Next</string>
+    <string name="new_password">Add Admin Password</string>
+
+    <!-- Eduroam Strings -->
+    <string name="eduroam_add_user_title">Create Eduroam Account</string>
+    <string name="eduroam_config_user_title">Configure Eduroam Account</string>
+    <string name="eduroam_title">Eduroam</string>
+    <string name="status_not_connected">Not Connected</string>
+    <string name="status_connected">Connected</string>
+    <string name="wifi_connected">Wifi Connected to Eduroam, Automatic Disconnection after 15 min!</string>
+    <string name="wifi_timedout">Cannot Connect to Wifi AP!</string>
+    <string name="logout_successful">Logged-Out from Eduroam!</string>
+    <string name="select_user">Please Select A User!</string>
+
+    <!-- Useful Arrays -->
+    <string-array name="time_period_arrays">
+        <item>Last 24 hours</item>
+        <item>Last day</item>
+        <item>Last 7 days</item>
+        <item>Last 14 days</item>
+        <item>Last 30 days</item>
+    </string-array>
+    <string-array name="languages">
+        <item>Auto</item>
+        <item>English</item>
+        <item>German</item>
+    </string-array>
+    <string-array name="languages_code">
+        <item>auto</item>
+        <item>en</item>
+        <item>de</item>
+    </string-array>
+</resources>

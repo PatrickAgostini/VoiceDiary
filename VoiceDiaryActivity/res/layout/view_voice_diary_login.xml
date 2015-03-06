@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/voice_diary_login_id_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="5dp"
+        android:text="@string/login" />
+
+     <Spinner
+          android:id="@+id/voice_diary_login_id"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/voice_diary_login_id_text"
+        android:tag="@string/login" />
+    
+
+    <TextView
+        android:id="@+id/voice_diary_login_password_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingLeft="5dp"
+        android:layout_below="@id/voice_diary_login_id"
+        android:text="@string/password" />
+
+    <EditText
+        android:id="@+id/voice_diary_login_password"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/voice_diary_login_password_text"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/voice_diary_login_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/login" />
+
+</RelativeLayout>

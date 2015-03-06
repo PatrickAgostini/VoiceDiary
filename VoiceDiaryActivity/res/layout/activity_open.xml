@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" 
+        android:layout_marginBottom = "200dp">
+
+        <Spinner
+            android:id="@+id/open_spinner_letters"
+            android:layout_width="100dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center_vertical|center_horizontal|center"
+            android:layout_weight="10"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="       " />
+
+        <Spinner
+            android:id="@+id/open_spinner_numbers"
+            android:layout_width="100dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center"
+            android:textSize="100sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/linearLayout1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="102dp"
+        android:text="                 "
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>

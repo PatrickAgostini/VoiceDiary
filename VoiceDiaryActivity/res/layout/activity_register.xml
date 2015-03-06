@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.fhtrier.voiceDiary"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+   <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" >
+
+       <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:text="@string/register_patientID" />
+       
+        <EditText
+            android:id="@+id/voice_diary_register_patient_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" 
+            android:paddingTop="5dp" />
+        
+        <RadioGroup
+            android:id="@+id/voice_diary_register_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp" >
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/male" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female" />
+        </RadioGroup>
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:text="@string/regquestion_smoker" />
+
+        <RadioGroup
+            android:id="@+id/voice_diary_register_smoker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp" >
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/yes" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no" />
+        </RadioGroup>
+
+
+        <Button
+            android:id="@+id/voice_diary_register_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:enabled="false"
+            android:text="@string/register" />
+    </LinearLayout>
+
+</ScrollView>

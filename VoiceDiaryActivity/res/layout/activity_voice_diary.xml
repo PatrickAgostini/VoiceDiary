@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp" >
+
+    <ImageView
+        android:id="@+id/voice_diary_activity_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/app_name"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="40dp"
+        android:maxHeight="512dp"
+        android:maxWidth="1408dp"
+        android:src="@drawable/homescreen_logo" />
+
+	<FrameLayout
+	    android:id="@+id/voice_diary_activity_view" 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/voice_diary_activity_image"
+	    android:layout_alignParentBottom="true" /></RelativeLayout>

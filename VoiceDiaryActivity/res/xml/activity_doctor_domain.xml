@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <ListPreference
+        android:defaultValue="auto"
+        android:enabled="true"
+        android:entries="@array/languages"
+        android:entryValues="@array/languages_code"
+        android:key="language"
+        android:title="@string/language" />
+
+    <Preference
+        android:enabled="true"
+        android:key="user_list"
+        android:title="@string/user_list" />
+    <Preference
+        android:enabled="true"
+        android:key="new_password"
+        android:title="@string/new_password" />
+    <Preference
+        android:enabled="true"
+        android:key="eduroam"
+        android:title="@string/eduroam_title" />
+    <Preference
+        android:enabled="true"
+        android:key="synchronize"
+        android:title="@string/button_synchronize" />
+    <Preference
+        android:enabled="true"
+        android:key="logout"
+        android:title="@string/exit" />
+
+</PreferenceScreen>
