@@ -34,7 +34,7 @@
     <string name="language">Language</string>
 	<string name="exit_app_question">Do You Want To Leave The App?</string>
 	<string name="master_password">Add New Master-Password</string>
-
+	<string name="passwordTitle">Password</string>
     <!-- Login Dialog -->
     <string name="login_successful">Login successful</string>
     <string name="login_error">Login failed. Please check your input.</string>

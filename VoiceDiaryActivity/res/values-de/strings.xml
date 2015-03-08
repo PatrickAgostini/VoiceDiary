@@ -3,7 +3,7 @@
     <string name="lang">de</string>
     <string name="app_name">Voice diary</string>
     <string name="settings">Einstellungen</string>
-    <string name="paswordTitle">Kennwort</string>
+    <string name="passwordTitle">Kennwort</string>
     <string name="ask_password">Kennwort Eingeben</string>
     <string name="diagramm">Diagramme</string>
     <string name="title_activity_record">Voice diary</string>
