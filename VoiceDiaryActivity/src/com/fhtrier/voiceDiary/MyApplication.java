@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
@@ -22,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.content.Context;
+import android.database.CursorJoiner;
 
 @SuppressLint("SimpleDateFormat")
 public class MyApplication extends Application
@@ -233,6 +235,32 @@ public class MyApplication extends Application
 	{
 		MyApplication.getSqLiteDatabase().execSQL(String.format("DELETE FROM `eduroam_accounts` WHERE `userID`='%s';", columnValue));
 	}
+	
+	public static ArrayList<RecordingData> getRecords(String userID)
+	{
+		Cursor dates = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT * FROM `protocolentry` WHERE `id_user`='%s';",userID), null);
+		if(dates.moveToNext())
+		{
+			ArrayList<RecordingData> dataList = new ArrayList<RecordingData>();
+			dates.moveToPrevious();
+			for(int i=0;i<dates.getCount();i++)
+			{
+				dates.moveToNext();
+				Cursor record = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `wave` FROM `record` WHERE `id_protocolentry`='%d' AND `id_user`='%s';",dates.getInt(dates.getColumnIndex("id_protocolentry")),userID), null);
+				record.moveToFirst();
+				RecordingData recDat = new RecordingData(record.getBlob(record.getColumnIndex("wave")), dates.getString(dates.getColumnIndex("date")));
+				dataList.add(recDat);
+			}
+			return dataList;
+		}
+		return null;
+
+	}
+	public static Cursor getActiveUser()
+	{
+		return MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `frequency`, `id_user`, `last_upload` FROM `user` WHERE `offline_login`!='%d';",0), null);
+	}
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public static void showWifiError(Context context, int Problem){
 

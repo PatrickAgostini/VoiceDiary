@@ -1,7 +1,9 @@
 package com.fhtrier.voiceDiary;
 
 import java.text.DecimalFormat;
+
 import org.holoeverywhere.app.AlertDialog;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.fhtrier.voiceDiary.NoiseMeterDialog.NoiseMeterDialogListener;
 
 /**
  * @author HO-Audio
@@ -22,7 +25,7 @@ import com.actionbarsherlock.app.SherlockActivity;
  * @author HO-Audio
  *
  */
-public class RecordActivity extends SherlockActivity
+public class RecordActivity extends SherlockActivity implements NoiseMeterDialogListener
 {
 	private RecordingThread recThread;
 	private RecordAssistant recAssistant;
@@ -208,7 +211,7 @@ public class RecordActivity extends SherlockActivity
 			public void onClick(DialogInterface dialog, int which)
 			{
 				RecordActivity.this.State = 1;
-				RecordActivity.this.noiseMeterDialog = new NoiseMeterDialog(RecordActivity.this, RecordActivity.this);
+				RecordActivity.this.noiseMeterDialog = new NoiseMeterDialog(RecordActivity.this);
 				RecordActivity.this.noiseMeterDialog.show();
 				noiseMeterDialog.startRecording();
 				//RecordActivity.this.start();
@@ -226,4 +229,14 @@ public class RecordActivity extends SherlockActivity
 		return builder.create();
 	}
 
+    public void onProceed(short[] ringBuffer)
+    {
+		this.State=0;
+		this.noiseBuffer = ringBuffer;
+		this.start();
+    }
+    public void onAbort()
+    {
+    	this.finish();
+    }
 }

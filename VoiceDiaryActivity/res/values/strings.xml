@@ -108,6 +108,8 @@
     <string name="open_phone_name">Phone Name</string>
     <string name="noise_meter">Noise Meter</string>
     <string name="user_list">User List</string>
+    
+    <string name="media_player">Media Player</string>
 
     <!-- General Message Strings -->
     <string name="wifi_timeout">Connecting takes too long. Please check your password or email!</string>

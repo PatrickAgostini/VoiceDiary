@@ -16,11 +16,9 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethodManager;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
@@ -112,7 +110,9 @@ public class VoiceDiaryActivity extends SherlockActivity  implements PasswordDia
 		{
 			if(!this.isAdmin)
 			{
-				Cursor c = MyApplication.getSqLiteDatabase().rawQuery("SELECT `frequency`, `id_user`, `last_upload` FROM `user` WHERE `session_id`='OfflineLogin';", null);
+				Cursor c = MyApplication.getActiveUser();
+				MyApplication.printCursor(MyApplication.getSqLiteDatabase().rawQuery("SELECT * FROM `user`;", null));
+				MyApplication.printCursor(c);
 				if (!c.moveToFirst())
 				{
 					Intent intent = new Intent(this, LoginActivity.class); 
@@ -204,7 +204,8 @@ public class VoiceDiaryActivity extends SherlockActivity  implements PasswordDia
 	public void onReturnValue(String Password) {
 		if(MyApplication.isPassword(Password))
 		{
-			MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user` SET `session_id`='%s' WHERE `id_user`='%s';", "",this.userID));		
+			MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user` SET `offline_login`='%d' WHERE `id_user`='%s';", 0,this.userID));	
+			
 			this.userID = null;
 			Intent intent = new Intent(VoiceDiaryActivity.this, VoiceDiaryActivity.class);
 			VoiceDiaryActivity.this.startActivity(intent);

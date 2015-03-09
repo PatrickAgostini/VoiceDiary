@@ -1,5 +1,6 @@
 package com.fhtrier.voiceDiary;
 
+import android.app.Activity;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder.AudioSource;
@@ -8,7 +9,7 @@ import android.util.Log;
 public class NoiseMeterThread extends Thread {
 
 	private static final String TAG = RecordingThread.class.getName();
-	RecordActivity 	 recordActivity;   
+	Activity activity;   
 	NoiseMeterDialog noiseMeterDialog;
 	public int 		 type;
 	short[] 		 array;
@@ -16,9 +17,9 @@ public class NoiseMeterThread extends Thread {
 	int     		 bufferPointer;
 
 
-	public NoiseMeterThread(RecordActivity recordActivity, NoiseMeterDialog noiseMeterDialog)
+	public NoiseMeterThread(Activity activity, NoiseMeterDialog noiseMeterDialog)
 	{
-		this.recordActivity = recordActivity ; 
+		this.activity = activity ; 
 		this.noiseMeterDialog = noiseMeterDialog;
 		android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_URGENT_AUDIO);
 		//-- Initialize Buffers --//
@@ -76,7 +77,7 @@ public class NoiseMeterThread extends Thread {
 				
 				fillBuffer();
 				
-				recordActivity.runOnUiThread(new Runnable()
+				this.activity.runOnUiThread(new Runnable()
 				{
 					@Override
 					public void run()

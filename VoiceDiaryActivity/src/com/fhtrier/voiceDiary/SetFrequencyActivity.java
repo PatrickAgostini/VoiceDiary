@@ -15,8 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.fhtrier.voiceDiary.NoiseMeterDialog.NoiseMeterDialogListener;
 
-public class SetFrequencyActivity extends SherlockActivity
+public class SetFrequencyActivity extends SherlockActivity implements NoiseMeterDialogListener
 {
     private static final int WAIT_TIME = 3;
 
@@ -26,6 +27,8 @@ public class SetFrequencyActivity extends SherlockActivity
 
     private AlertDialog completeDialog;
     private AlertDialog startDialog;
+    
+    NoiseMeterDialog noiseMeterDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -192,7 +195,8 @@ public class SetFrequencyActivity extends SherlockActivity
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
-                SetFrequencyActivity.this.showStartMessage();
+            	SetFrequencyActivity.this.noiseMeterDialog = new NoiseMeterDialog(SetFrequencyActivity.this);
+            	SetFrequencyActivity.this.noiseMeterDialog.show();
             }
         });
 
@@ -211,7 +215,8 @@ public class SetFrequencyActivity extends SherlockActivity
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
-                SetFrequencyActivity.this.showStartMessage();
+            	SetFrequencyActivity.this.noiseMeterDialog = new NoiseMeterDialog(SetFrequencyActivity.this);
+            	SetFrequencyActivity.this.noiseMeterDialog.show();
             }
         });
 
@@ -240,7 +245,9 @@ public class SetFrequencyActivity extends SherlockActivity
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
-                SetFrequencyActivity.this.showStartMessage();
+                //SetFrequencyActivity.this.showStartMessage();
+            	SetFrequencyActivity.this.noiseMeterDialog = new NoiseMeterDialog(SetFrequencyActivity.this);
+            	SetFrequencyActivity.this.noiseMeterDialog.show();
             }
         });
 
@@ -255,5 +262,15 @@ public class SetFrequencyActivity extends SherlockActivity
         });
 
         return builder.create();
+    }
+    
+    public void onProceed(short[] ringBuffer)
+    {
+    	SetFrequencyActivity.this.showStartMessage();
+
+    }
+    public void onAbort()
+    {
+    	
     }
 }

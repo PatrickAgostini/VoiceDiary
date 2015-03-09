@@ -159,7 +159,7 @@ public class QuestionActivity extends SherlockActivity
 			{
 
 
-				Cursor c = sqLiteDatabase.rawQuery("SELECT `id_user` FROM `user` WHERE `session_id` NOT NULL;", null);
+				Cursor c = sqLiteDatabase.rawQuery("SELECT `id_user` FROM `user` WHERE `offline_login` NOT NULL;", null);
 
 				c.moveToFirst();
 				this.user = c.getString(0);

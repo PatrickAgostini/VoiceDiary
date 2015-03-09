@@ -10,13 +10,14 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
+import android.app.Activity;
 
 public class NoiseMeterDialog extends AlertDialog {
 
 	Context context;
-	RecordActivity recordActivity;
 	NoiseMeterThread noiseMeterThread;
-
+	NoiseMeterDialogListener activity;
+	
 	LayoutInflater li;
 	View promptsView ;
 
@@ -29,15 +30,22 @@ public class NoiseMeterDialog extends AlertDialog {
 
 	short[] ringBuffer;
 
-	public NoiseMeterDialog(Context context,RecordActivity recordActivity) {
+	public interface NoiseMeterDialogListener {
+        public void onProceed(short[] ringBuffer);
+        public void onAbort();
+    }
+	
+	public NoiseMeterDialog(Context context) {
 		super(context);
 		this.context = context;
-		this.recordActivity = recordActivity;
 		this.li = LayoutInflater.from(context);
 		this.promptsView = li.inflate(R.layout.activity_noise_meter, null);
 		setView(promptsView);
 		this.setTitle(R.string.noise_meter);
 
+		this.activity = (NoiseMeterDialogListener) context;
+		this.startRecording();
+		
 		setButton(AlertDialog.BUTTON_POSITIVE, context.getString(R.string.button_start) , (new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -64,10 +72,8 @@ public class NoiseMeterDialog extends AlertDialog {
 			public void onClick(View v) {				
 				if(NoiseMeterDialog.this.levelAcceptance)
 				{
-					NoiseMeterDialog.this.Abort = true;
-					NoiseMeterDialog.this.recordActivity.State=0;
-					NoiseMeterDialog.this.recordActivity.noiseBuffer = NoiseMeterDialog.this.ringBuffer;
-					NoiseMeterDialog.this.recordActivity.start();
+					NoiseMeterDialog.this.activity.onProceed(NoiseMeterDialog.this.ringBuffer);
+					NoiseMeterDialog.this.stopRecording();
 					dismiss();
 				}else
 				{
@@ -77,8 +83,9 @@ public class NoiseMeterDialog extends AlertDialog {
 		getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				NoiseMeterDialog.this.stopRecording();
 				NoiseMeterDialog.this.Abort = true;
-				NoiseMeterDialog.this.recordActivity.finish();
+				NoiseMeterDialog.this.activity.onAbort();
 				dismiss();
 			}
 		});
@@ -88,8 +95,8 @@ public class NoiseMeterDialog extends AlertDialog {
 	@Override
 	public void onBackPressed()
 	{
+		this.activity.onAbort();
 		this.dismiss();
-		this.recordActivity.finish();
 	}
 
 
@@ -120,7 +127,7 @@ public class NoiseMeterDialog extends AlertDialog {
 		{
 			noise.setTextColor(Color.YELLOW);
 			noise.setText(R.string.moderate_noise);
-			this.startButton.setEnabled(true);
+			this.startButton.setEnabled(false);
 			this.levelAcceptance = false;
 		}
 		else
@@ -142,7 +149,7 @@ public class NoiseMeterDialog extends AlertDialog {
 			this.noiseMeterThread.interrupt();
 			this.noiseMeterThread = null;
 		}
-		this.noiseMeterThread = new NoiseMeterThread(this.recordActivity, this);
+		this.noiseMeterThread = new NoiseMeterThread((Activity) this.context, this);
 	}
 
 	public void stopRecording()

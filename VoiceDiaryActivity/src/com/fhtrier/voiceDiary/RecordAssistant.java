@@ -23,7 +23,6 @@ public class RecordAssistant implements IRecordingAssistant
 	private int counter = 0;
 	private int counterPre = 0;
 	private int counterPost = 0;
-	private double[] currentRecording = new double[14700];
 	private int arraySizeCounter = 0;
 	private ArrayList<short[]> arrayList = new ArrayList<short[]>();
 	private ArrayList<Integer> frequencyList = new ArrayList<Integer>();
@@ -52,7 +51,7 @@ public class RecordAssistant implements IRecordingAssistant
 	{
 		SQLiteDatabase sqLiteDatabase = MyApplication.getSqLiteDatabase();
 
-		Cursor c = sqLiteDatabase.rawQuery("SELECT id_user FROM user WHERE `session_id` NOT NULL;", null);
+		Cursor c = sqLiteDatabase.rawQuery("SELECT id_user FROM user WHERE `offline_login` NOT NULL;", null);
 		c.moveToFirst();
 		String userid = c.getString(0);
 		c.close();

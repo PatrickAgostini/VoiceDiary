@@ -89,6 +89,7 @@
     <string name="synchronize_ok">Synchronisation war erfolgreich!</string>
     <string name="synchronize_not_ok">Synchronisation war nicht erfolgreich!</string>
     <string name="noise_meter">Geräuschmesser</string>
+    <string name="media_player">Media Player</string>
 
     <string-array name="time_period_arrays">
         <item>Letzten 24 Stunden</item>
