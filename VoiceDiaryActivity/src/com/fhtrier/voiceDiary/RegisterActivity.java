@@ -1,5 +1,6 @@
 package com.fhtrier.voiceDiary;
 import org.holoeverywhere.app.AlertDialog;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Toast;
+
 import com.actionbarsherlock.app.SherlockActivity;
 
 public class RegisterActivity extends SherlockActivity
@@ -65,14 +67,24 @@ public class RegisterActivity extends SherlockActivity
 			@Override
 			public void onClick(View v)
 			{
-				register.setEnabled(false);
+				
 
 				RegisterActivity.this.userID       = RegisterActivity.this.patientId.getText().toString(); 
 				RegisterActivity.this.password     = MyApplication.createPassword();
 				final boolean tmp_male             = ((RadioButton)RegisterActivity.this.gender.getChildAt(0)).isChecked();
 				final boolean tmp_smoker  		   = ((RadioButton)RegisterActivity.this.smoker.getChildAt(0)).isChecked();
 				
-				new RegisterThread(RegisterActivity.this, RegisterActivity.this.userID, RegisterActivity.this.password, tmp_male,tmp_smoker);
+				if(MyApplication.getUser(RegisterActivity.this.userID)==null)
+				{
+					register.setEnabled(false);
+					new RegisterThread(RegisterActivity.this, RegisterActivity.this.userID, RegisterActivity.this.password, tmp_male,tmp_smoker);
+				}
+				else
+				{
+					register.setEnabled(true);
+					Toast toast = Toast.makeText(RegisterActivity.this.getApplicationContext(), RegisterActivity.this.getText(R.string.user_duplicate), Toast.LENGTH_SHORT);
+					toast.show();
+				}
 			}
 		});
 	}

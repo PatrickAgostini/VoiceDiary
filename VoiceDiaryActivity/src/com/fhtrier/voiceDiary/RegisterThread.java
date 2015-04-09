@@ -29,7 +29,7 @@ public class RegisterThread extends Thread
 	@Override
 	public void run()
 	{
-			MyApplication.getSqLiteDatabase().execSQL(String.format("INSERT INTO `user` VALUES ('%s', '%s', NULL, '%s', '%s', '%d', '%d', '%d');", this.user, "OfflineLoggin", this.smoker, this.male, 0, 1 , 1));
+			MyApplication.getSqLiteDatabase().execSQL(String.format("INSERT INTO `user` VALUES ('%s', '%s', NULL, '%s', '%s', '%d', '%d', '%d');", this.user, "OfflineLogin", this.smoker, this.male, 0, 1 , 1));
 			MyApplication.getSqLiteDatabase().execSQL(String.format("INSERT INTO `user_protocolenty` VALUES ('%s', '0', '-1');", this.user));
 			MyApplication.getSqLiteDatabase().execSQL(String.format("INSERT INTO `registredUsers` VALUES ('%s', '%s', '%s');", this.user, MyApplication.passwordEncrypt(this.password), df.format(new Date())));
 			MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user` SET `session_id` = '%s' WHERE `id_user` = '%s';", "OfflineLogin", this.user));
