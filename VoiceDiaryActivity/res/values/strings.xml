@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+<string name="user_duplicate">Patienten ID already in use!</string>
     <!-- General Strings -->
     <string name="lang">en</string>
     <string name="app_name">Voice diary</string>

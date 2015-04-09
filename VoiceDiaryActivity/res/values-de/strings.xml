@@ -1,5 +1,5 @@
 <resources>
-
+	<string name="user_duplicate">Patienten ID schon vergeben!</string>
     <string name="lang">de</string>
     <string name="app_name">Voice diary</string>
     <string name="settings">Einstellungen</string>
