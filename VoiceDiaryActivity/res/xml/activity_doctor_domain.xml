@@ -27,10 +27,6 @@
         android:title="@string/button_synchronize" />
     <Preference
         android:enabled="true"
-        android:key="mediaPlayer"
-        android:title="@string/media_player" />
-    <Preference
-        android:enabled="true"
         android:key="logout"
         android:title="@string/exit" />
 

@@ -113,19 +113,22 @@ public class VoiceDiaryActivity extends SherlockActivity  implements PasswordDia
 				Cursor c = MyApplication.getActiveUser();
 				MyApplication.printCursor(MyApplication.getSqLiteDatabase().rawQuery("SELECT * FROM `user`;", null));
 				MyApplication.printCursor(c);
-				if (!c.moveToFirst())
+				c.moveToFirst();
+				if (c.moveToFirst())
+				{
+					if (c.isNull(0))
+					{
+						Intent intent = new Intent(this, SetFrequencyActivity.class);
+						intent.putExtra("caller", VoiceDiaryActivity.class.getName());
+						this.startActivity(intent);
+						c.close();
+						this.finish();
+						return;
+					}
+				}
+				else
 				{
 					Intent intent = new Intent(this, LoginActivity.class); 
-					this.startActivity(intent);
-					c.close();
-					this.finish();
-					return;
-				}
-				c.moveToFirst();
-				if (c.isNull(0))
-				{
-					Intent intent = new Intent(this, SetFrequencyActivity.class);
-					intent.putExtra("caller", VoiceDiaryActivity.class.getName());
 					this.startActivity(intent);
 					c.close();
 					this.finish();

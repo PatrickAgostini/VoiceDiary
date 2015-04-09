@@ -129,17 +129,6 @@ public class AdministrationActivity extends SherlockPreferenceActivity{
 				return true;
 			}
 		});
-		
-		findPreference("mediaPlayer").setOnPreferenceClickListener(new OnPreferenceClickListener()
-		{
-
-			@Override
-			public boolean onPreferenceClick(Preference preference)
-			{
-				new DialogMediaPlayer(AdministrationActivity.this).show();
-				return true;
-			}
-		});
 	}
 
 	@Override
