@@ -111,9 +111,6 @@ public class VoiceDiaryActivity extends SherlockActivity  implements PasswordDia
 			if(!this.isAdmin)
 			{
 				Cursor c = MyApplication.getActiveUser();
-				MyApplication.printCursor(MyApplication.getSqLiteDatabase().rawQuery("SELECT * FROM `user`;", null));
-				MyApplication.printCursor(c);
-				c.moveToFirst();
 				if (c.moveToFirst())
 				{
 					if (c.isNull(0))
@@ -207,7 +204,7 @@ public class VoiceDiaryActivity extends SherlockActivity  implements PasswordDia
 	public void onReturnValue(String Password) {
 		if(MyApplication.isPassword(Password))
 		{
-			MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user` SET `offline_login`='%d' WHERE `id_user`='%s';", 0,this.userID));	
+			MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user` SET `session_id`='%s' WHERE `id_user`='%s';", "", this.userID));	
 			
 			this.userID = null;
 			Intent intent = new Intent(VoiceDiaryActivity.this, VoiceDiaryActivity.class);

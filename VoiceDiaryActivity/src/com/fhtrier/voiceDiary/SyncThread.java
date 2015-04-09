@@ -86,12 +86,16 @@ public class SyncThread extends Thread
 			if(users2Register!=null)
 			{
 				for(int i=0;i<users2Register.length;i++) {
+					socket = new Socket();
+					adr = new InetSocketAddress(Values.ADDRESS, Values.PORT);
+					socket.connect(adr, 8000);
+
 					// Get Users
 					PatientData patData = MyApplication.getPatientData(users2Register[i]);
-									
+
 					//Send Stuff
 					outputStream = new ObjectOutputStream(CipherStreamGen.getEncryptOutputStream(new BufferedOutputStream(socket.getOutputStream())));
-					outputStream.writeObject(new RegisterRequest(patData.userID, patData.password, patData.male, this.birthday, patData.smoker, this.job, this.hoarseness, this.dysphonia, this.operation, this.operation_date, this.operation_diagnose, this.therapy, this.therapy_date, this.therapy_diagnose));
+					outputStream.writeObject(new RegisterRequest(MyApplication.getExternalId(patData.userID), patData.password, patData.male, this.birthday, patData.smoker, this.job, this.hoarseness, this.dysphonia, this.operation, this.operation_date, this.operation_diagnose, this.therapy, this.therapy_date, this.therapy_diagnose));
 					outputStream.flush();
 					
 					// Receive Stuff and check if ok

@@ -22,6 +22,6 @@ public interface Values
     public static String[] Phone_Id = {"phone_name","current_clinic"}; 
 
 
-    public static String adminPassword = "movd2015.,";
+    public static String adminPassword = "bW92ZDIwMTU=";
     
 }
