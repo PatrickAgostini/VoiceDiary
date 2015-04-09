@@ -59,7 +59,7 @@ public class SyncThread extends Thread
 		this.therapy_diagnose   = "none";
 		
 		this.handler = new Handler();
-		this.handler.postDelayed(runnable, 30000);
+		this.handler.postDelayed(runnable, 60000);
 		
 		this.AA = AA;
 	    this.progress = ProgressDialog.show(AA,"Synchronization", "Sending Data...", true);
@@ -78,7 +78,7 @@ public class SyncThread extends Thread
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			socket = new Socket();
 			SocketAddress adr = new InetSocketAddress(Values.ADDRESS, Values.PORT);
-			socket.connect(adr, 8000);
+			socket.connect(adr, 20000);
 			ObjectOutputStream outputStream;			
 			ObjectInputStream inputStream;
 
@@ -88,7 +88,7 @@ public class SyncThread extends Thread
 				for(int i=0;i<users2Register.length;i++) {
 					socket = new Socket();
 					adr = new InetSocketAddress(Values.ADDRESS, Values.PORT);
-					socket.connect(adr, 8000);
+					socket.connect(adr, 20000);
 
 					// Get Users
 					PatientData patData = MyApplication.getPatientData(users2Register[i]);
@@ -136,7 +136,7 @@ public class SyncThread extends Thread
 						
 						socket = null;
 						socket = new Socket();
-						socket.connect(adr, 8000);
+						socket.connect(adr, 20000);
 						outputStream = null;
 						inputStream  = null;
 						// Start Entry Stuff¨
