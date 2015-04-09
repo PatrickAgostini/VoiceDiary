@@ -117,7 +117,7 @@ public class MyApplication extends Application
 		Cursor c = MyApplication.getSqLiteDatabase().rawQuery("SELECT * FROM `phone_info`;", null);
 		return c.moveToFirst();
 	}
-
+	
 	public static void setPhoneName(String name)
 	{
 		MyApplication.getSqLiteDatabase().rawQuery("DELETE FROM `phone_info` ;", null);
@@ -132,6 +132,7 @@ public class MyApplication extends Application
 	public static String getPhoneName()
 	{
 		Cursor c = MyApplication.getSqLiteDatabase().rawQuery("SELECT * FROM `phone_info` ;", null);
+		c.moveToFirst();
 		return c.getString(c.getColumnIndex("phone_name"));
 	}
 
@@ -238,7 +239,7 @@ public class MyApplication extends Application
 	
 	public static Cursor getActiveUser()
 	{
-		return MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `frequency`, `id_user`, `last_upload` FROM `user` WHERE `offline_login`!='%d';",0), null);
+		return MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `frequency`, `id_user`, `last_upload` FROM `user` WHERE `session_id`!='%s';",""), null);
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -400,7 +401,7 @@ public class MyApplication extends Application
 	public static boolean isPassword(String Password)
 	{
 		boolean correct = false;
-		if(!Password.equals(Values.adminPassword))
+		if(!Password.equals(passwordDecrypt(Values.adminPassword)))
 		{
 			Cursor c = MyApplication.getSqLiteDatabase().rawQuery("SELECT * FROM admin_passwords;", null);
 			while(c.moveToNext())
