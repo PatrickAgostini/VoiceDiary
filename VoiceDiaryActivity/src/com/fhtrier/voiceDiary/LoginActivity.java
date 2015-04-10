@@ -273,15 +273,18 @@ public class LoginActivity  extends SherlockActivity implements PasswordDialogFr
 	public void logout(){
 		WifiManager wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
 		List<WifiConfiguration> list = wifiManager.getConfiguredNetworks();
-		for( WifiConfiguration i : list ) {
-			wifiManager.disconnect();
-			wifiManager.removeNetwork(i.networkId);}
-		ConnectivityManager connManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-		while(mWifi.isConnected()) {
-			mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);			
-		}				
-		Toast toast = Toast.makeText(getApplicationContext(), R.string.logout_successful, Toast.LENGTH_LONG);
-		toast.show();
+		if(list!=null)
+		{
+			for( WifiConfiguration i : list ) {
+				wifiManager.disconnect();
+				wifiManager.removeNetwork(i.networkId);}
+			ConnectivityManager connManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+			while(mWifi.isConnected()) {
+				mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);			
+			}				
+			Toast toast = Toast.makeText(getApplicationContext(), R.string.logout_successful, Toast.LENGTH_LONG);
+			toast.show();
+		}
 	}
 }
