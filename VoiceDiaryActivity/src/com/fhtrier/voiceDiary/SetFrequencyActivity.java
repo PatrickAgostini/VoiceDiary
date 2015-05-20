@@ -271,6 +271,6 @@ public class SetFrequencyActivity extends SherlockActivity implements NoiseMeter
     }
     public void onAbort()
     {
-    	
+        SetFrequencyActivity.this.finish();
     }
 }

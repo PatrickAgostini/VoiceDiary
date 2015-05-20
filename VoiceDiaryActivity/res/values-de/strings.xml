@@ -195,5 +195,7 @@
     <string name="status_not_connected">Nicht Verbunden</string>
     <string name="status_connected">Verbunden</string>
     <string name="select_user">Bitte Wählen Sie einen Benutzer Aus!</string>
+    
+    <string name="recordingDiary">Aufnahmen Tagebuch</string>
 
 </resources>

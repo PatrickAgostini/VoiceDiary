@@ -242,6 +242,17 @@ public class MyApplication extends Application
 		return MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `frequency`, `id_user`, `last_upload` FROM `user` WHERE `session_id`!='%s';",""), null);
 	}
 	
+	public static String getActiveUser2()
+	{
+		Cursor c = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `frequency`, `id_user`, `last_upload` FROM `user` WHERE `session_id`!='%s';",""), null);
+		
+		if(c.moveToFirst())
+		{
+			return c.getString(c.getColumnIndex("id_user"));
+		}
+		return null;
+	}
+	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public static void showWifiError(Context context, int Problem){
 
@@ -384,6 +395,26 @@ public class MyApplication extends Application
 		{
 			String[] account = getUser(userID);
 			return  new PatientData(account[0], account[1],i2b(c.getDouble(c.getColumnIndex("male"))),i2b(c.getDouble(c.getColumnIndex("smoker"))));
+		}
+		return null;
+	}
+	
+	public static String[] getRecDates()
+	{
+		String userID = MyApplication.getActiveUser2();
+		Cursor c = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `date` FROM `protocolentry` WHERE `id_user`= '%s';", userID), null);
+		if(c.moveToFirst())
+		{
+			c.moveToPrevious();
+			int cnt = c.getCount();
+			String[] dates = new String[cnt];
+			int i = 0;
+			while(c.moveToNext())
+			{
+				dates[i] = c.getString(0);
+				i++;
+			}
+		return dates;
 		}
 		return null;
 	}

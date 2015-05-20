@@ -15,18 +15,19 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
-        android:name="com.fhtrier.voiceDiary.MyApplication"
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
+        android:keepScreenOn="true"
         android:label="@string/app_name"
-        android:theme="@style/Holo.Theme" 
-        android:keepScreenOn = "true">
+        android:theme="@style/Holo.Theme" >
         <activity
-            android:name="com.fhtrier.voiceDiary.VoiceDiaryActivity"
+            android:name=".VoiceDiaryActivity"
             android:configChanges="locale" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,29 +35,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.fhtrier.voiceDiary.PatientActivity" >
+        <activity android:name=".PatientActivity" >
         </activity>
-        <activity android:name="com.fhtrier.voiceDiary.RecordActivity" >
+        <activity android:name=".RecordActivity" >
         </activity>
-        <activity android:name="com.fhtrier.voiceDiary.SetFrequencyActivity" >
+        <activity android:name=".SetFrequencyActivity" >
         </activity>
-        <activity android:name="com.fhtrier.voiceDiary.QuestionActivity" >
+        <activity android:name=".QuestionActivity" >
         </activity>
-        <activity android:name="com.fhtrier.voiceDiary.LoginActivity" >
+        <activity android:name=".LoginActivity" >
         </activity>
-        <activity android:name="com.fhtrier.voiceDiary.RegisterActivity" >
+        <activity android:name=".RegisterActivity" >
         </activity>
+
         <service
-            android:name="com.fhtrier.voiceDiary.EduroamLogoutService"
+            android:name=".EduroamLogoutService"
             android:label=".LogOut"
             android:process=":remote" >
         </service>
+
         <activity
-            android:name="com.fhtrier.voiceDiary.AdministrationActivity"
+            android:name=".AdministrationActivity"
             android:label="@string/title_activity_administration" >
         </activity>
         <activity
-            android:name="com.fhtrier.voiceDiary.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/title_activity_main" >
         </activity>
     </application>

@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.view.inputmethod.InputMethodManager;
 
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 
@@ -70,6 +69,18 @@ public class PatientActivity  extends SherlockPreferenceActivity {
                 PatientActivity.this.startActivity(intent);
                 //PatientActivity.this.finish();
 
+                return true;
+            }
+        });
+        findPreference("recordingDiary2").setOnPreferenceClickListener(new OnPreferenceClickListener()
+        {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference)
+            {
+
+                RecordingDiary recDiary = new RecordingDiary(PatientActivity.this);
+                recDiary.show();
                 return true;
             }
         });
