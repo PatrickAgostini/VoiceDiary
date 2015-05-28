@@ -4,19 +4,28 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+
+import org.holoeverywhere.util.ArrayUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
+import android.net.ParseException;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -38,6 +47,15 @@ public class MyApplication extends Application
 	public static final int Wrong_Password = 4;
 	public static final int No_User = 5;
 	public static final int Wifi_TimeOut = 6;
+	
+	
+	public static boolean weckerOnOff = false;
+	public static int startH = 0;
+	public static int startM = 0;
+	public static int stopH = 0;
+	public static int stopM = 0;
+	public static int interval = 1;
+	
 	@Override
 	public void onCreate()
 	{
@@ -398,27 +416,54 @@ public class MyApplication extends Application
 		}
 		return null;
 	}
-	
-	public static String[] getRecDates()
+	public static Map<String,String[]> getRecDates() throws java.text.ParseException
 	{
 		String userID = MyApplication.getActiveUser2();
 		Cursor c = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `date` FROM `protocolentry` WHERE `id_user`= '%s';", userID), null);
-		if(c.moveToFirst())
+
+		if(c.getCount()>0)
 		{
-			c.moveToPrevious();
-			int cnt = c.getCount();
-			String[] dates = new String[cnt];
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			SimpleDateFormat format2 = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat format3 = new SimpleDateFormat("hh:mm:ss");
+			
+			String[] date = new String[c.getCount()];
+			String[] time = new String[c.getCount()];
 			int i = 0;
 			while(c.moveToNext())
 			{
-				dates[i] = c.getString(0);
-				i++;
+				Date date1         = format.parse(c.getString(0));
+				date[i]           = format2.format(date1);
+				time[i]           = format3.format(date1);
+				i++;				
 			}
-		return dates;
+			
+			Map<String,String[]> mDates =  new TreeMap<String,String[]>();
+			List<String> mTimes = new ArrayList<String>();
+			String first = date[0];
+			
+			for(i=0;i<c.getCount();i++)
+			{
+				if(first.equals(date[i]))
+				{
+					mTimes.add(time[i]);
+				}
+				else
+				{
+					mDates.put(first, mTimes.toArray(new String[mTimes.size()]));
+					mTimes.clear();
+					first = date[i];
+					i--;
+				}
+			}
+			if(mTimes.size()>0)
+			{
+				mDates.put(first, mTimes.toArray(new String[mTimes.size()]));
+			}
+			return mDates;
 		}
 		return null;
 	}
-
 	public static void setRegistered(String userID)
 	{
 		MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user` SET `offline_registration` = '%d' WHERE `id_user` = '%s';", 0, userID));
@@ -464,6 +509,36 @@ public class MyApplication extends Application
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, table);
 			spinner.setAdapter(adapter);
 		}
+	}
+	
+	public static void setReminderSettings(String id_user, int startH, int startM, int stopH, int stopM, int interval)
+	{
+		Cursor c= MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT * FROM `reminder_settings` WHERE `id_user`='%s';",id_user), null);
+		if(c.moveToFirst())
+		{
+			MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `reminder_settings` SET `startH` = '%d', `startM` = '%d', `stopH` = '%d', `stopM` = '%d', `interval` = '%d' WHERE `id_user` = '%s';", startH, startM, stopH, stopM, interval, id_user));
+			
+		}else
+		{
+			MyApplication.getSqLiteDatabase().execSQL(String.format("INSERT INTO `reminder_settings` (%s,%d,%d,%d,%d,%d);", id_user, startH, startM, stopH, stopM, interval));
+			
+		}
+	}
+	
+	public static String[] getReminderSettings(String id_user)
+	{
+		String[] reminderSettings = new String[5];
+		Cursor c= MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT * FROM `reminder_settings` WHERE `id_user`='%s';",id_user), null);
+		if(c.moveToFirst())
+		{
+			reminderSettings[0] = c.getString(1);
+			reminderSettings[1] = c.getString(2);
+			reminderSettings[2] = c.getString(3);
+			reminderSettings[3] = c.getString(4);
+			reminderSettings[4] = c.getString(5);
+			return reminderSettings;
+		}
+		return null;
 	}
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public static boolean i2b(Double intValue)

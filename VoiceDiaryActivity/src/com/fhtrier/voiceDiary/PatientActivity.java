@@ -1,5 +1,6 @@
 package com.fhtrier.voiceDiary;
 
+import java.text.ParseException;
 import java.util.Locale;
 
 import android.content.Intent;
@@ -79,8 +80,26 @@ public class PatientActivity  extends SherlockPreferenceActivity {
             public boolean onPreferenceClick(Preference preference)
             {
 
-                RecordingDiary recDiary = new RecordingDiary(PatientActivity.this);
-                recDiary.show();
+                RecordingDiary recDiary;
+				try {
+					recDiary = new RecordingDiary(PatientActivity.this);
+	                recDiary.show();
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                return true;
+            }
+        });
+        findPreference("reminder").setOnPreferenceClickListener(new OnPreferenceClickListener()
+        {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference)
+            {
+
+                Reminder reminder = new Reminder(PatientActivity.this);
+                reminder.show();
                 return true;
             }
         });

@@ -148,6 +148,16 @@ public class DatabaseHelper extends SQLiteOpenHelper
             		"`date` DATETIME NOT NULL," +
             		"CONSTRAINT `fk_analyzedata_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`)" +
             		");");
+            
+            sqliteDatabase.execSQL("CREATE TABLE `reminder_settings` ( " +
+             		"`id_user` VARCHAR(200), " +
+             		"`startH` INT(11), " +
+             		"`startM` INT(11), " +
+             		"`stopH` INT(11), " +
+             		"`stopM` INT(11), " +
+             		"`interval` INT(11), " +
+             		"PRIMARY KEY (`id_user`)" +
+             		");"); 
                         
             BufferedReader reader = new BufferedReader(new InputStreamReader(context.getResources().getAssets().open("data.d"), "ISO-8859-1"));
             

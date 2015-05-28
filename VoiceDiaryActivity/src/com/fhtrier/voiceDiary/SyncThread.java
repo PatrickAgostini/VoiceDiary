@@ -59,7 +59,7 @@ public class SyncThread extends Thread
 		this.therapy_diagnose   = "none";
 		
 		this.handler = new Handler();
-		this.handler.postDelayed(runnable, 60000);
+		this.handler.postDelayed(runnable, 90000);
 		
 		this.AA = AA;
 	    this.progress = ProgressDialog.show(AA,"Synchronization", "Sending Data...", true);
@@ -117,7 +117,7 @@ public class SyncThread extends Thread
 				{
 					socket = null;
 					socket = new Socket();
-					socket.connect(adr, 8000);
+					socket.connect(adr, 20000);
 					outputStream = null;
 					inputStream  = null;
 
