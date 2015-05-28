@@ -193,5 +193,15 @@
     <string name="hello_world">Hello world!</string>
 
     <string name="recordingDiary">Recording Diary</string>
+    <string name="reminder">Reminder</string>
     
+    
+	<string name="start">Start</string>
+	<string name="stop">Stop</string>
+	
+	<string name="onOff">On/Off</string>
+	<string name="repeat">Interval</string>
+	
+	<string name="notification_title">Recording Reminder</string>
+	<string name="notification_text">You have scheduled a Recording Session for now!</string>
 </resources>

@@ -16,4 +16,8 @@
         android:enabled="true"
         android:key="recordingDiary2"
         android:title="@string/recordingDiary" />
+     <Preference
+        android:enabled="true"
+        android:key="reminder"
+        android:title="@string/reminder" />
 </PreferenceScreen>

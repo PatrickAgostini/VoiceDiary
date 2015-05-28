@@ -197,5 +197,12 @@
     <string name="select_user">Bitte Wählen Sie einen Benutzer Aus!</string>
     
     <string name="recordingDiary">Aufnahmen Tagebuch</string>
-
+	<string name="reminder">Wecker</string>
+	<string name="start">Beginn</string>
+	<string name="stop">Ende</string>
+	<string name="onOff">An/Aus</string>
+	
+	<string name="repeat">Interval</string>
+	<string name="notification_title">Aufnahme Erinnerung</string>
+	<string name="notification_text">Sie haben für jetzt eine Aufnahme geplant!</string>
 </resources>
