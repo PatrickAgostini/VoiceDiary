@@ -205,4 +205,6 @@
 	<string name="repeat">Interval</string>
 	<string name="notification_title">Aufnahme Erinnerung</string>
 	<string name="notification_text">Sie haben für jetzt eine Aufnahme geplant!</string>
+	<string name="no_dates">Keine Aufnahmen</string>
+	<string name="no_dates_available">Keine Aufnahmen vorhanden!</string>
 </resources>

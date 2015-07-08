@@ -51,7 +51,7 @@ public class RecordActivity extends SherlockActivity implements NoiseMeterDialog
 		SliderView sv = (SliderView)this.findViewById(R.id.frequencySlider);
 		sv.setGreenArea(Values.MAX_FREQUENCY_DEVITATION * 2);
 
-		Cursor c = MyApplication.getSqLiteDatabase().rawQuery("SELECT frequency FROM user", null);
+		Cursor c = MyApplication.getSqLiteDatabase().rawQuery("SELECT frequency FROM user WHERE `offline_login`=1;", null);
 		c.moveToFirst();
 		frequency = c.getInt(0);
 		c.close();

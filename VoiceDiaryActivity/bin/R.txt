@@ -1245,6 +1245,8 @@ int string new_password 0x7f0d00b3
 int string next 0x7f0d00b2
 int string next_button_label 0x7f0d001d
 int string no 0x7f0d0044
+int string no_dates 0x7f0d00c7
+int string no_dates_available 0x7f0d00c8
 int string noise_indication_text 0x7f0d008f
 int string noise_level_too_high 0x7f0d0066
 int string noise_meter 0x7f0d0087

@@ -204,4 +204,7 @@
 	
 	<string name="notification_title">Recording Reminder</string>
 	<string name="notification_text">You have scheduled a Recording Session for now!</string>
+	
+	<string name="no_dates">No Recordings</string>
+	<string name="no_dates_available">There are no Recordings available!</string>
 </resources>

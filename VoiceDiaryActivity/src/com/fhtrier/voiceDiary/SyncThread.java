@@ -1,12 +1,14 @@
 package com.fhtrier.voiceDiary;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -59,7 +61,7 @@ public class SyncThread extends Thread
 		this.therapy_diagnose   = "none";
 		
 		this.handler = new Handler();
-		this.handler.postDelayed(runnable, 90000);
+		this.handler.postDelayed(runnable, 120000000);
 		
 		this.AA = AA;
 	    this.progress = ProgressDialog.show(AA,"Synchronization", "Sending Data...", true);
@@ -86,9 +88,13 @@ public class SyncThread extends Thread
 			if(users2Register!=null)
 			{
 				for(int i=0;i<users2Register.length;i++) {
+					if(!socket.isClosed())
+					{
+						socket.close();
+					}
 					socket = new Socket();
 					adr = new InetSocketAddress(Values.ADDRESS, Values.PORT);
-					socket.connect(adr, 20000);
+					socket.connect(adr, 200000);
 
 					// Get Users
 					PatientData patData = MyApplication.getPatientData(users2Register[i]);
@@ -115,16 +121,18 @@ public class SyncThread extends Thread
 			{  
 				for(int j=0;j<users2Update.length;j++) 
 				{
-					socket = null;
+					if(!socket.isClosed())
+					{
+						socket.close();
+					}
 					socket = new Socket();
 					socket.connect(adr, 20000);
 					outputStream = null;
 					inputStream  = null;
 
 					String[] account = MyApplication.getUser(users2Update[j]);
-					
 					outputStream     = new ObjectOutputStream(CipherStreamGen.getEncryptOutputStream(new BufferedOutputStream(socket.getOutputStream())));
-					outputStream.writeObject(new LoginRequest(account[0], account[1]));
+					outputStream.writeObject(new LoginRequest(MyApplication.getExternalId(account[0]), account[1]));
 					outputStream.flush();
 					
 					inputStream                       = new ObjectInputStream(CipherStreamGen.getDecryptInputStream(new BufferedInputStream(socket.getInputStream())));
@@ -134,7 +142,10 @@ public class SyncThread extends Thread
 					if (loginResponse.isSuccessfully())
 					{
 						
-						socket = null;
+						if(!socket.isClosed())
+						{
+							socket.close();
+						}
 						socket = new Socket();
 						socket.connect(adr, 20000);
 						outputStream = null;
@@ -142,7 +153,7 @@ public class SyncThread extends Thread
 						// Start Entry Stuff¨
 
 						outputStream = new ObjectOutputStream(CipherStreamGen.getEncryptOutputStream(new BufferedOutputStream(socket.getOutputStream())));
-						outputStream.writeObject(new StartEntryRequest(account[0], this.sessionId));
+						outputStream.writeObject(new StartEntryRequest(MyApplication.getExternalId(account[0]), this.sessionId));
 						outputStream.flush();
 
 						// Start Entry Stuff
@@ -152,11 +163,40 @@ public class SyncThread extends Thread
 
 						if (startEntryResponse.getDate() != null)
 						{
-							Cursor entrys = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `p`.`id_protocolentry`, `p`.`date`, `r`.`wave`, `r`.`filename` ,`u`.`last_upload` FROM `user` AS `u`, `protocolentry` AS `p`, `record` AS `r` WHERE `p`.`id_user` = '%s' AND `r`.`id_user` = `p`.`id_user` AND `p`.`id_protocolentry` = `r`.`id_protocolentry` AND `p`.`date` > `u`.`last_upload`;", users2Update[j]), null);
+							//Cursor entrys = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `p`.`id_protocolentry`, `p`.`date`, `r`.`wave`, `r`.`filename` ,`u`.`last_upload` FROM `user` AS `u`, `protocolentry` AS `p`, `record` AS `r` WHERE `p`.`id_user` = '%s' AND `r`.`id_user` = `p`.`id_user` AND `p`.`id_protocolentry` = `r`.`id_protocolentry` AND `p`.`date` > `u`.`last_upload`;", users2Update[j]), null);
+							//Cursor dates = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `p`.`id_protocolentry`, `p`.`date`, `r`.`filename` ,`u`.`last_upload` FROM `user` AS `u`, `protocolentry` AS `p`, `record` AS `r` WHERE `p`.`id_user` = '%s' AND `r`.`id_user` = `p`.`id_user` AND `p`.`id_protocolentry` = `r`.`id_protocolentry` AND `p`.`date` > `u`.`last_upload`;", users2Update[j]), null);
+							Cursor dates = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `p`.`date`,`r`.`filename` FROM `record` AS `r`,`protocolentry` AS `p`,`user` AS `u` WHERE `p`.`id_user` = '%s' AND `p`.`id_protocolentry`=`r`.`id_protocolentry` AND `p`.`id_user`=`r`.`id_user` AND `p`.`id_user` =`u`.`id_user` AND `p`.`date`>`u`.`last_upload`;", users2Update[j]), null);
+							MyApplication.printCursor( MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `date` FROM `protocolentry` WHERE `id_user` = '%s';", users2Update[j]), null));
 							Log.d(this.getClass().getName(), "start sync");
-							while (entrys.moveToNext())
+							//while (entrys.moveToNext())
+							while(dates.moveToNext())
 							{
-								byte[] waveArray = entrys.getBlob(2);
+								String date     = dates.getString(0);
+								String filename = dates.getString(1);
+								
+								Cursor len = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT length(`r`.`wave`) FROM `user` AS `u`, `protocolentry` AS `p`, `record` AS `r` WHERE `p`.`id_user` = '%s' AND `r`.`id_user` = `p`.`id_user` AND `p`.`id_protocolentry` = `r`.`id_protocolentry` AND `p`.`date`='%s';", users2Update[j], date), null);
+								len.moveToFirst();
+								double leng2 = (double)len.getInt(0);
+								double leng  = (double)len.getInt(0)/2;
+								
+								
+								Cursor entrys = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT SUBSTR(`wave`,0,'%s') FROM `record` WHERE `filename`='%s' AND `id_user`='%s' ;", String.valueOf((int)leng), filename, users2Update[j]), null);
+								entrys.moveToFirst();
+								byte[] waveArray1 = entrys.getBlob(0);
+
+								entrys = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT SUBSTR(`wave`,'%s','%s') FROM `record` WHERE `filename`='%s' AND `id_user`='%s' ;", String.valueOf((int)leng),String.valueOf((int)(leng2-leng)), filename, users2Update[j]), null);
+								entrys.moveToFirst();
+								byte[] waveArray2 = entrys.getBlob(0);
+								
+								ByteBuffer buf = ByteBuffer.allocate((int)leng2);
+								buf.put(waveArray1);
+								buf.put(waveArray2);
+
+								byte[] waveArray = buf.array( );
+								
+								entrys = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `p`.`id_protocolentry`, `p`.`date`, `r`.`filename` ,`u`.`last_upload` FROM `user` AS `u`, `protocolentry` AS `p`, `record` AS `r` WHERE `p`.`id_user` = '%s' AND `r`.`id_user` = `p`.`id_user` AND `p`.`id_protocolentry` = `r`.`id_protocolentry` AND `p`.`date`='%s';", users2Update[j], date), null);
+								entrys.moveToFirst();
+								
 								Cursor answers = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `id_answer` FROM `rel_protocolentry_answer` WHERE `id_user` = '%s' AND `id_protocolentry` = '%d';",  users2Update[j], entrys.getInt(0)), null);
 								int[] answersArray = new int[answers.getCount()];
 								for (int i = 0; i < answersArray.length; ++i)
@@ -166,7 +206,7 @@ public class SyncThread extends Thread
 								}
 								answers.close();
 								Log.d(this.getClass().getName(), "sendEntryRequest");
-								outputStream.writeObject(new EntryRequest(entrys.getString(1), answersArray, entrys.getString(3), waveArray));
+								outputStream.writeObject(new EntryRequest(entrys.getString(1), answersArray, entrys.getString(2), waveArray));
 								outputStream.flush();
 								Log.d(this.getClass().getName(), "flush()");
 								Log.d(this.getClass().getName(), "EntryResponse");
@@ -176,16 +216,23 @@ public class SyncThread extends Thread
 									 MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user_protocolenty` SET `last_updated_protocolenty` = '%d' WHERE `id_user` = '%s';", entrys.getInt(0),  users2Update[j]));
 								}
 								SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-								 MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user` SET `last_upload` = '%s' WHERE `id_user` = '%s';", df.format(new Date()),  users2Update[j]));
+								//MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user` SET `last_upload` = '%s' WHERE `id_user` = '%s';", df.format(new Date()),  users2Update[j]));
+								MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user` SET `last_upload` = '%s' WHERE `id_user` = '%s';", date,  users2Update[j]));
+								entrys.close();
+								len.close();
 							}
-							entrys.close();
-							MyApplication.updateUser(loginResponse.getSessionId(), 0, loginResponse.isSmoker()?1:0, loginResponse.isMale()?1:0,  users2Update[j]);
+							MyApplication.updateUser(users2Update[j]);
 						}
 					}
 				}
 			}      
 			this.progress.dismiss();
 			this.handler.removeCallbacks(runnable);
+
+			if(!socket.isClosed())
+			{
+				socket.close();
+			}
 			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			this.AA.runOnUiThread(new Runnable()
 			{
@@ -269,13 +316,8 @@ public class SyncThread extends Thread
 		}  
 		this.progress.dismiss();
 		this.handler.removeCallbacks(runnable);
+		
 	}
-
-	public boolean i2b(Double intValue)
-	{
-		return (intValue != 0);
-	}
-	
 	private Runnable runnable = new Runnable() {
 		   @Override
 		   public void run() {

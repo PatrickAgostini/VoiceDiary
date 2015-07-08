@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.holoeverywhere.ArrayAdapter;
 import org.holoeverywhere.widget.ListView;
@@ -15,6 +16,7 @@ import org.holoeverywhere.widget.ListView;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SimpleAdapter;
@@ -54,7 +56,15 @@ public class RecordingDiary extends AlertDialog {
 		security.add(createItem("Show security warnings", "Show warning if there is a problem with a site's security"));  */
 
 		// create our list and custom adapter  
-		SeparatedListAdapter adapter = fillAdapter(MyApplication.getRecDates(), new SeparatedListAdapter(this.getContext()));  
+		Map<String,String[]> dates = MyApplication.getRecDates();
+		if(dates==null)
+		{
+			dates = new TreeMap<String, String[]>();
+			String[] s1 = new String[1];
+			s1[0] = this.getContext().getResources().getString(R.string.no_dates_available);
+			dates.put(this.getContext().getResources().getString(R.string.no_dates), s1);
+		}
+		SeparatedListAdapter adapter = fillAdapter(dates, new SeparatedListAdapter(this.getContext()));  
 		//adapter.addSection("Array test", new ArrayAdapter<String>(this.getContext(), R.layout.list_item, new String[] { "First item", "Item two" }));  
 		//adapter.addSection("Security", new SimpleAdapter(this.getContext(), security, R.layout.list_complex, new String[] { ITEM_TITLE, ITEM_CAPTION }, new int[] { R.id.list_complex_title, R.id.list_complex_caption }));  
 		

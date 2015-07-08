@@ -1,5 +1,11 @@
 package com.fhtrier.voiceDiary;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -16,6 +22,7 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -71,7 +78,76 @@ public class VoiceDiaryActivity extends SherlockActivity  implements PasswordDia
 
 				@Override
 				public void onClick(View v)
-				{
+				{							
+					
+					MyApplication.printCursor(MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT * FROM `user`;"), null));
+					MyApplication.printCursor(MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT * FROM `session`;"), null));
+					MyApplication.printCursor(MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT * FROM `protocolentry`;"), null));
+					
+					MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user` SET `session_id`='OfflineLogin' , `offline_registration`=1, `last_upload`= '1970-06-22 00:00:00';"));
+					MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user_protocolenty` SET `next_protocolentry_id`=0,`last_updated_protocolenty`=-1;"));
+					MyApplication.printCursor(MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT * FROM `user`;"), null));
+					/*MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `record` SET `id_user`='WJ070785' WHERE `id_user`='QN200491' AND `id_protocolentry`>5;"));
+					MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `rel_protocolentry_answer` SET `id_user`='WJ070785' WHERE `id_user`='QN200491' AND `id_protocolentry`>5;"));
+					
+					MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user_protocolenty` SET `next_protocolentry_id`=0,`last_updated_protocolenty`=-1;"));
+					*/
+					
+					/*int i=0;
+					for(int j=6;j<109;j++)
+					{
+						String num = "REC_"+Integer.toString(i)+".wav";
+						MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `protocolentry` SET `id_protocolentry` = '%d' WHERE `id_protocolentry` = '%d' AND `id_user`='WJ070785';", i, j));
+						MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `rel_protocolentry_answer` SET `id_protocolentry` = '%d' WHERE `id_protocolentry` = '%d' AND `id_user`='WJ070785';", i, j));
+						MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `record` SET `id_protocolentry` = '%d',`filename`='%s' WHERE `id_user` = '%s' AND `id_protocolentry` = '%d';", i,num,"WJ070785",j));
+						i++;
+					}
+					MyApplication.printCursor(MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT filename, id_user,id_protocolentry FROM `record`;"), null));
+					
+					
+					/*for(int j=11;j>-1;j--)
+					{
+						String num = "REC_"+Integer.toString(j)+".wav";
+						  String str = String.format("UPDATE `rel_protocolentry_answer` SET `id_protocolentry` = '%d' WHERE `id_user` = '%s' AND `id_protocolentry` = '%d';", j+1,"FM250991",j);
+						MyApplication.getSqLiteDatabase().execSQL(str);
+					}*/
+					/*Cursor c = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT id_protocolentry,id_user,filename FROM `record`;"), null);
+					MyApplication.printCursor(c);
+					
+					Cursor len = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT length(`wave`) FROM `record` WHERE `id_user` = 'QN200491' AND `id_protocolentry`='5';"), null);
+					len.moveToFirst();
+					double leng2 = (double)len.getInt(0);
+					double leng  = (double)len.getInt(0)/2;
+					Cursor entrys = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT SUBSTR(`wave`, 0, '%s') FROM `record` WHERE `filename`='REC_5.wav' AND `id_user`='QN200491' ;", String.valueOf((int)leng)), null);
+					entrys.moveToFirst();
+					byte[] waveArray1 = entrys.getBlob(0);
+
+					entrys = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT SUBSTR(`wave`, '%s','%s') FROM `record` WHERE `filename`='REC_5.wav' AND `id_user`='QN200491' ;", String.valueOf((int)leng), String.valueOf((int)(leng2-leng))), null);
+					entrys.moveToFirst();
+					byte[] waveArray2 = entrys.getBlob(0);
+					
+					ByteBuffer buf = ByteBuffer.allocate((int)leng2);
+					
+					buf.put(waveArray1);
+					buf.put(waveArray2);
+
+					byte[] waveArray = buf.array();
+
+					FileOutputStream fos;
+					try {
+						fos = new FileOutputStream("/sdcard/test2.wav");
+						fos.write(waveArray);
+						fos.close();
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					*/
+					
+					
 					Intent intent = new Intent(VoiceDiaryActivity.this, PatientActivity.class); 
 					VoiceDiaryActivity.this.startActivity(intent);
 					VoiceDiaryActivity.this.finish();
@@ -101,7 +177,7 @@ public class VoiceDiaryActivity extends SherlockActivity  implements PasswordDia
 	@Override
 	protected void onResume()
 	{
-		super.onResume();
+ 		super.onResume();
 		if(!MyApplication.checkPhoneName())
 		{
 			DialogPhoneName phoneNameDialog = new DialogPhoneName(this, this);
@@ -204,7 +280,7 @@ public class VoiceDiaryActivity extends SherlockActivity  implements PasswordDia
 	public void onReturnValue(String Password) {
 		if(MyApplication.isPassword(Password))
 		{
-			MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user` SET `session_id`='%s' WHERE `id_user`='%s';", "", this.userID));	
+			MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user` SET `offline_login`='%d' WHERE `id_user`='%s';", 0, this.userID));	
 			
 			this.userID = null;
 			Intent intent = new Intent(VoiceDiaryActivity.this, VoiceDiaryActivity.class);

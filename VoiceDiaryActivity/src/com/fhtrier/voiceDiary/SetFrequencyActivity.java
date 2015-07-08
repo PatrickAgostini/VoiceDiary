@@ -9,6 +9,7 @@ import org.holoeverywhere.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -150,8 +151,9 @@ public class SetFrequencyActivity extends SherlockActivity implements NoiseMeter
 
     public void resultFrequency(int frequency)
     {
-        MyApplication.getSqLiteDatabase().execSQL("UPDATE user SET frequency = " + frequency);
-
+//        MyApplication.getSqLiteDatabase().execSQL("UPDATE user SET frequency = " + frequency + "WHERE `offline_login` = 1;");
+        MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user` SET `frequency` = '%d' WHERE `offline_login` = '%d';", frequency, 1));
+    
         completeDialog.setMessage(this.getString(R.string.set_frequency_end_dialog_message, frequency));
         completeDialog.show();
     }

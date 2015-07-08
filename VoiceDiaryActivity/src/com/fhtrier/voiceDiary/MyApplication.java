@@ -257,12 +257,12 @@ public class MyApplication extends Application
 	
 	public static Cursor getActiveUser()
 	{
-		return MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `frequency`, `id_user`, `last_upload` FROM `user` WHERE `session_id`!='%s';",""), null);
+		return MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `frequency`, `id_user`, `last_upload` FROM `user` WHERE `offline_login`!='%d';",0), null);
 	}
 	
 	public static String getActiveUser2()
 	{
-		Cursor c = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `frequency`, `id_user`, `last_upload` FROM `user` WHERE `session_id`!='%s';",""), null);
+		Cursor c = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `frequency`, `id_user`, `last_upload` FROM `user` WHERE `offline_login`!='%d';",0), null);
 		
 		if(c.moveToFirst())
 		{
@@ -387,6 +387,34 @@ public class MyApplication extends Application
 	
 	public static String[] getUsers2Update()
 	{
+		//printCursor( MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT * FROM protocolentry ;"), null));
+		//MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user` SET `last_upload`='%s' WHERE `id_user`='%s';", "2015-05-23 11:01:47", "KF031192"));		
+		//printCursor( MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT * FROM user WHERE `offline_login`= '%d' ;", 0), null));
+	
+		Cursor users2update = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `id_user`FROM user WHERE `session_id`= '%s' ;", "OfflineLogin"), null);
+		//MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user` SET `offline_login`='%d' WHERE `id_user`='%s';",1, "WJ070785"));	
+		//Cursor users2update = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `id_user`FROM user WHERE `offline_login`= '%d' ;", 1), null);
+		//users2update.moveToFirst();
+		//String[] user = new String[1];
+		//user[0] = users2update.getString(0);
+		//return user;
+		
+		if(users2update!=null)
+		{
+			String[] u2upd = new String[users2update.getCount()];
+			for(int i=0;i<users2update.getCount();i++)
+			{
+				users2update.moveToNext();
+				u2upd[i] =  users2update.getString(0);
+			}
+			return u2upd;
+		}
+		return null;	
+	}
+	
+	public static String[] getUsers2Update2()
+	{
+		printCursor(MyApplication.getSqLiteDatabase().rawQuery("SELECT * FROM `protocolentry`;", null));
 		Cursor users2update = MyApplication.getSqLiteDatabase().rawQuery(String.format("SELECT `id_user`FROM user WHERE `offline_login`= '%d' and `id_user`!='Admin';", 1), null);
 		if(users2update!=null)
 		{
@@ -401,9 +429,9 @@ public class MyApplication extends Application
 		return null;		
 	}
 	
-	public static void updateUser(String session_id, int offlineLogin, int smoker, int male, String userID)
+	public static void updateUser(String userID)
 	{
-		MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user` SET `session_id` = '%s', `offline_login` = '%d', `smoker` = '%d', `male` = '%d' WHERE `id_user` = '%s';", session_id, offlineLogin, smoker, male, userID));
+		MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user` SET `session_id` = '%s', `offline_login` = '%d' WHERE `id_user` = '%s';", "", 0, userID));
 	}
 
 	public static PatientData getPatientData(String userID)
@@ -412,7 +440,7 @@ public class MyApplication extends Application
 		if(c.moveToFirst())
 		{
 			String[] account = getUser(userID);
-			return  new PatientData(account[0], account[1],i2b(c.getDouble(c.getColumnIndex("male"))),i2b(c.getDouble(c.getColumnIndex("smoker"))));
+			return  new PatientData(account[0], account[1],i2b(c.getString(c.getColumnIndex("male"))),i2b(c.getString(c.getColumnIndex("smoker"))));
 		}
 		return null;
 	}
@@ -462,6 +490,7 @@ public class MyApplication extends Application
 			}
 			return mDates;
 		}
+
 		return null;
 	}
 	public static void setRegistered(String userID)
@@ -541,8 +570,8 @@ public class MyApplication extends Application
 		return null;
 	}
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public static boolean i2b(Double intValue)
+	public static boolean i2b(String boolStrValue)
 	{
-		return (intValue != 0);
+		return (boolStrValue.equals("true"));
 	}
 }

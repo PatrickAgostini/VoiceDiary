@@ -51,7 +51,8 @@ public class RecordAssistant implements IRecordingAssistant
 	{
 		SQLiteDatabase sqLiteDatabase = MyApplication.getSqLiteDatabase();
 
-		Cursor c = sqLiteDatabase.rawQuery("SELECT id_user FROM user WHERE `offline_login` NOT NULL;", null);
+		Cursor c = sqLiteDatabase.rawQuery("SELECT id_user FROM user WHERE `offline_login`!=0;", null);
+		
 		c.moveToFirst();
 		String userid = c.getString(0);
 		c.close();

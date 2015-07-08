@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
     <Preference
         android:enabled="true"
         android:key="set_frequency2"
         android:title="@string/set_frequency" />
 
     <ListPreference
-        android:enabled="true"
         android:defaultValue="auto"
+        android:enabled="true"
         android:entries="@array/languages"
         android:entryValues="@array/languages_code"
         android:key="language2"
         android:title="@string/language" />
+
     <Preference
         android:enabled="true"
         android:key="recordingDiary2"
         android:title="@string/recordingDiary" />
-     <Preference
-        android:enabled="true"
-        android:key="reminder"
-        android:title="@string/reminder" />
+
 </PreferenceScreen>

@@ -159,7 +159,7 @@ public class QuestionActivity extends SherlockActivity
 			{
 
 
-				Cursor c = sqLiteDatabase.rawQuery("SELECT `id_user` FROM `user` WHERE `offline_login` NOT NULL;", null);
+				Cursor c = sqLiteDatabase.rawQuery("SELECT `id_user` FROM `user` WHERE `offline_login`!=0;", null);
 
 				c.moveToFirst();
 				this.user = c.getString(0);
@@ -298,7 +298,7 @@ public class QuestionActivity extends SherlockActivity
 
 	@Override
 	public void onBackPressed() {
-		MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user` SET `offline_login` = '%d' WHERE `session_id` NOT NULL;",1));
+		//MyApplication.getSqLiteDatabase().execSQL(String.format("UPDATE `user` SET `offline_login` = '%d' WHERE `session_id` NOT NULL;",1));
 		Dialog dialog = generateDialog();
 		dialog.show();
 	}

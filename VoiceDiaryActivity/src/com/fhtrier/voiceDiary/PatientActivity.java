@@ -91,7 +91,7 @@ public class PatientActivity  extends SherlockPreferenceActivity {
                 return true;
             }
         });
-        findPreference("reminder").setOnPreferenceClickListener(new OnPreferenceClickListener()
+    /*    findPreference("reminder").setOnPreferenceClickListener(new OnPreferenceClickListener()
         {
 
             @Override
@@ -102,7 +102,7 @@ public class PatientActivity  extends SherlockPreferenceActivity {
                 reminder.show();
                 return true;
             }
-        });
+        });*/
 	}
 	
 	@Override

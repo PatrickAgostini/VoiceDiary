@@ -73,7 +73,12 @@ public class EduroamLoginThread extends Thread {
 		wifiManager.addNetwork(selectedConfig);
 
 		//Find Eduroam
-		List<WifiConfiguration> list = wifiManager.getConfiguredNetworks();
+		List<WifiConfiguration> list = null;
+				while(list==null)
+				{
+					list = wifiManager.getConfiguredNetworks();
+
+				}
 		this.wifiExists = checkWifi(list, "\"" + "eduroam" + "\"");
 		if(this.wifiExists){
 			wifiLogin(wifiManager,list);
